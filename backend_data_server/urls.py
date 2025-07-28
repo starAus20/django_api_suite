@@ -16,10 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from .views import LandingAPI
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("homepage/", include("homepage.urls")),
     path("demo/rest/api/", include("demo_rest_api.urls")),
+    path("landing/api/", include("django_api_suite.landing_api.urls")),
     path('', include("homepage.urls")),
+     path("index/", LandingAPI.as_view(), name="landing_api_index"),
 ]

@@ -55,3 +55,7 @@ dmypy.json
 # Environment variables
 .env
 .env.*
+
+
+
+secrets/
