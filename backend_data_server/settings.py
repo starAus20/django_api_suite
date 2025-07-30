@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'homepage',
     'demo_rest_api',
-    'landing_api',
+    'django_api_suite.landing_api',
 ]
 
 MIDDLEWARE = [
@@ -141,5 +141,5 @@ FIREBASE_CREDENTIALS_PATH = credentials.Certificate("secrets/landing-key.json")
 
 # Inicialice la conexión con el Realtime Database con la clave privada y la URL de referencia
 firebase_admin.initialize_app(FIREBASE_CREDENTIALS_PATH, {
-   'databaseURL': 'https://landing-9899e-default-rtdb.firebaseio.com/'
+   'databaseURL': 'https://pruebadawn-8f00d-default-rtdb.firebaseio.com/'
 })

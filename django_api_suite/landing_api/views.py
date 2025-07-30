@@ -10,34 +10,37 @@ from firebase_admin import db
 
 class LandingAPI(APIView):
     name = "Landing API"
-    collection_name = "your_collection_name"  # Reemplaza con el nombre real de tu colección
+    collection_name = "votes"  # Reemplaza con el nombre real de tu colección
 
     def get(self, request):
-        # Obtiene la referencia a la colección en Firebase Realtime Database
-        ref = db.reference(self.collection_name)
+
+        # Referencia a la colección
+        ref = db.reference(f'{self.collection_name}')
+
+        # get: Obtiene todos los elementos de la col ección
         data = ref.get()
-        # Si no hay datos, retorna una lista vacía
-        items = list(data.values()) if data else []
-        return Response(items, status=status.HTTP_200_OK)
+
+        # Devuelve un arreglo JSON
+        return Response(data, status=status.HTTP_200_OK)
     
     
     
     def post(self, request):
 
-      data = request.data
+        data = request.data
 
-      # Referencia a la colección
-      ref = db.reference(f'{self.collection_name}')
+        # Referencia a la colección
+        ref = db.reference(f'{self.collection_name}')
 
-      current_time  = datetime.now()
-      custom_format = current_time.strftime("%d/%m/%Y, %I:%M:%S %p").lower().replace('am', 'a. m.').replace('pm', 'p. m.')
-      data.update({"timestamp": custom_format })
+        current_time  = datetime.now()
+        custom_format = current_time.strftime("%d/%m/%Y, %I:%M:%S %p").lower().replace('am', 'a. m.').replace('pm', 'p. m.')
+        data.update({"timestamp": custom_format })
 
-      # push: Guarda el objeto en la colección
-      new_resource = ref.push(data)
+        # push: Guarda el objeto en la colección
+        new_resource = ref.push(data)
 
-      # Devuelve el id del objeto guardado
-      return Response({"id": new_resource.key}, status=status.HTTP_201_CREATED)
+        # Devuelve el id del objeto guardado
+        return Response({"id": new_resource.key}, status=status.HTTP_201_CREATED)
     
 
 
