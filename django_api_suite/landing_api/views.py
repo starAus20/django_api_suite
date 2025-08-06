@@ -10,7 +10,7 @@ from firebase_admin import db
 
 class LandingAPI(APIView):
     name = "Landing API"
-    collection_name = "votes"  # Reemplaza con el nombre real de tu colección
+    collection_name = "likes"  # Reemplaza con el nombre real de tu colección
 
     def get(self, request):
 
